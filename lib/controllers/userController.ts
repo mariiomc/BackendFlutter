@@ -10,6 +10,7 @@ export class UserController {
     public async register_user(req: Request, res: Response) {
         try{
             // this check whether all the filds were send through the request or not
+            console.log("register user")
             if (req.body.first_name 
                 && req.body.last_name 
                 && req.body.email 
@@ -32,11 +33,14 @@ export class UserController {
                     modified_date: new Date(),
                 };
                 const user_data = await this.user_service.register(user_params);
+                console.log("registro completado exitosamente")
                 return res.status(201).json(user_data );
             }else{            
+                console.log("400")
                 return res.status(400).json({ error: 'Missing fields' });
             }
         }catch(error){
+            console.log("500")
             return res.status(500).json({ error: 'Internal server error' });
         }
     }

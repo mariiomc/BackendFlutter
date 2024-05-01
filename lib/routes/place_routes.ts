@@ -32,12 +32,16 @@ export class PlaceRoutes {
         });
 
         app.get('/place', (req: Request, res: Response, next: NextFunction) => {
+            console.log("getPlace")
             this.AuthJWT.verifyToken(req, res, (err?: any) => {
                 if (err) {
                     return next(err); // Short-circuit if token verification fails
                 }
                 this.place_controller.get_places(req, res);
             });
+            
+    
+
         });
 
         app.get('/place/admin', (req: Request, res: Response, next: NextFunction) => {
